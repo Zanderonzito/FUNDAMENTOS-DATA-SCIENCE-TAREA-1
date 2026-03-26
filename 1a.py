@@ -35,9 +35,29 @@ def calcular_maximo(notas):
           maximo = temporal         
     return maximo 
 
+def bubble_sort(notas, orden):
+   largo = calcular_largo(notas)
+   nueva_lista = notas
+   for contador_1 in range(largo):
+      for contador_2 in range(largo - 1):
+         if orden == 1:
+           if nueva_lista[contador_2] > nueva_lista[contador_2 + 1]:
+             temporal = nueva_lista[contador_2]
+             nueva_lista[contador_2] = nueva_lista[contador_2 + 1]
+             nueva_lista[contador_2 + 1] = temporal
+         else:
+           if nueva_lista[contador_2] < nueva_lista[contador_2 + 1]:
+             temporal = nueva_lista[contador_2]
+             nueva_lista[contador_2] = nueva_lista[contador_2 + 1]
+             nueva_lista[contador_2 + 1] = temporal    
+   return nueva_lista        
 
+
+
+orden = int(input("ingresa 1 (ascendentemente) o 0 (descendentemente)"))
 print(calcular_suma(notas))
 print(calcular_largo(notas))
 print(calcular_promedio(notas))
 print(calcular_minimo(notas))
 print(calcular_maximo(notas))
+print(bubble_sort(notas, orden))
