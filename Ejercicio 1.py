@@ -60,7 +60,7 @@ def calcular_mediana(notas):
    else:
         mediana = (lista_ordenada[int(largo_lista/2)])    
    return mediana
-
+#falta asegurar que entregue un error previsto en caso de que ingresen listas que no sean estrictamente numeros
 
 orden = int(input("ingresa 1 (ascendentemente) o 0 (descendentemente)"))
 print(calcular_suma(notas))
