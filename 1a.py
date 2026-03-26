@@ -1,0 +1,43 @@
+#Restriccion: Todos los ejercicios deben resolverse con Python basico. No se permite el uso de librerias externas (NumPy, Pandas, etc.).
+#Clean Code: Cada funcion debe tener docstring, nombres en snake_case, codigo legible y modular.
+
+notas = [4.8, 6.2, 5.5, 3.9, 7.0, 4.1, 5.8, 6.0, 3.5, 5.2, 6.8, 2.9, 4.0, 5.0, 6.5, 4.3, 5.7, 3.2, 6.1, 4.6]
+
+def calcular_suma(datos): 
+    suma = 0
+    for elemento in notas:
+      temporal = elemento
+      suma = temporal + suma
+    return suma  
+
+def calcular_largo(notas):
+    contador = 0
+    for elemento in notas:
+      contador = contador + 1
+    return contador  
+ 
+def calcular_promedio(notas):
+   return calcular_suma(notas)/calcular_largo(notas)
+
+def calcular_minimo(notas):
+    minimo = 999
+    for elemento in notas:
+      temporal = elemento
+      if minimo > temporal:
+          minimo = temporal         
+    return minimo  
+
+def calcular_maximo(notas):
+    maximo = 0
+    for elemento in notas:
+      temporal = elemento
+      if maximo < temporal:
+          maximo = temporal         
+    return maximo 
+
+
+print(calcular_suma(notas))
+print(calcular_largo(notas))
+print(calcular_promedio(notas))
+print(calcular_minimo(notas))
+print(calcular_maximo(notas))
