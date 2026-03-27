@@ -2,7 +2,9 @@
 #Clean Code: Cada funcion debe tener docstring, nombres en snake_case, codigo legible y modular.
 
 notas = [4.8, 6.2, 5.5, 3.9, 7.0, 4.1, 5.8, 6.0, 3.5, 5.2, 6.8, 2.9, 4.0, 5.0, 6.5, 4.3, 5.7, 3.2, 6.1, 4.6]
+grados_c = [0, 15, 25, 30, 100]
 
+# 1a) Funciones básicas 
 def calcular_suma(datos): 
     suma = 0
     for elemento in notas:
@@ -35,6 +37,7 @@ def calcular_maximo(notas):
           maximo = temporal         
     return maximo 
 
+# 1b) Ordenamiento Bubble Sort 
 def bubble_sort(notas, orden):
    largo = calcular_largo(notas)
    nueva_lista = notas
@@ -52,6 +55,7 @@ def bubble_sort(notas, orden):
              nueva_lista[contador_2 + 1] = temporal    
    return nueva_lista        
 
+# 1c) Mediana y Desviación Estándar 
 def calcular_mediana(notas):
    lista_ordenada = bubble_sort(notas, 1)
    largo_lista = calcular_largo(lista_ordenada)
@@ -62,6 +66,15 @@ def calcular_mediana(notas):
    return mediana
 #falta asegurar que entregue un error previsto en caso de que ingresen listas que no sean estrictamente numeros
 
+
+# 1d) Conversión de Temperaturas
+def celcius_a_fahrenheit(grados_c):
+   nueva_lista = grados_c
+   largo_lista = calcular_largo(grados_c)
+   for contador in range(largo_lista):
+      nueva_lista[contador] = nueva_lista[contador] * 9/5 + 32
+   return nueva_lista  
+
 orden = int(input("ingresa 1 (ascendentemente) o 0 (descendentemente)"))
 print(calcular_suma(notas))
 print(calcular_largo(notas))
@@ -70,3 +83,4 @@ print(calcular_minimo(notas))
 print(calcular_maximo(notas))
 print(bubble_sort(notas, orden))
 print(calcular_mediana(notas))
+print(celcius_a_fahrenheit(grados_c))
