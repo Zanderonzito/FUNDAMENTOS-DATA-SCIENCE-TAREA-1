@@ -64,7 +64,16 @@ def calcular_mediana(datos):
    else:
         mediana = (lista_ordenada[int(largo_lista/2)])    
    return mediana
-#falta asegurar que entregue un error previsto en caso de que ingresen listas que no sean estrictamente numeros
+
+def calcular_desviacion_estandar(notas):
+   promedio = calcular_promedio(notas)
+   suma = 0
+   for elemento in notas:
+      diferencia = elemento - promedio
+      suma = suma + diferencia * diferencia
+   varianza = suma / calcular_largo(notas)
+   return round(varianza ** 0.5)
+
 
 
 # 1d) Conversión de Temperaturas
@@ -123,15 +132,17 @@ print("Funcion calcular_promedio:",calcular_promedio(lista))
 print("Funcion calcular_minimo:",calcular_minimo(lista))
 print("Funcion calcular_maximo:",calcular_maximo(lista))
 print("")
-print("1b) Ordenamiento Bubble Sort \n ")
+print("1b) Ordenamiento Bubble Sort\n ")
 print("lista ordenada:",bubble_sort(lista, orden))
 print("")
-print("1c) Mediana y Desviación Estándar ")
-print(calcular_mediana(lista))
+print("1c) Mediana y Desviación Estándar\n ")
+print("Funcion calcular_mediana:",calcular_mediana(lista))
+print("Funcion calcular_desviacion_estandar:",calcular_desviacion_estandar(lista))
 print("")
-print("1d) Conversión de Temperaturas")
+print("1d) Conversión de Temperaturas\n ")
 print(celcius_a_fahrenheit(temperatura))
 print("")
 print("1e) Reporte Estadístico Integrado")
 reporte_estadistico(ciudades)
+
 
