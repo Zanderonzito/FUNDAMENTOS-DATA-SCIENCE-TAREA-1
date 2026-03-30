@@ -83,17 +83,17 @@ def filtrar_por_estado(reporte, estado):
 #|||||||||||||||||||||||EJERCICIO 2C|||||||||||||||||||||
 def ordenar_reporte(reporte, clave='promedio', descendente=True):
     "Aquí ordenamos en si, cualquier clave numérica usando bubble sort."
-    arr = list(reporte)
-    n = len(arr)
-    for i in range(n):
-        for j in range(0, n - i - 1):
+    registro = list(reporte)
+    numero = len(registro)
+    for iteracion in range(numero):
+        for posicion in range(0, numero - iteracion - 1):
             if descendente:
-                if arr[j][clave] < arr[j + 1][clave]:
-                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                if registro[posicion][clave] < registro[posicion + 1][clave]:
+                    registro[posicion], registro[posicion + 1] = registro[posicion + 1], registro[posicion]
             else:
-                if arr[j][clave] > arr[j + 1][clave]:
-                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
-    return arr
+                if registro[posicion][clave] > registro[posicion + 1][clave]:
+                    registro[posicion], registro[posicion + 1] = registro[posicion + 1], registro[posicion]
+    return registro
 
 #||||||||||||||||||||||||Ejercicio 2D|||||||||||||||||||||
 def buscar_estudiante(lista_estudiantes, nombre):
@@ -138,12 +138,14 @@ if __name__ == "__main__":
             for r in Reporte:
                 print(f"Nombre: {r['nombre']} | Promedio: {r['promedio']} ({r['estado']}) | Rango: {r['rango de notas']}")
                 
+
         elif opcion == "2":
             print("===> CONTEO POR ESTADO:")
             conteo_estados = contar_por_estado(Reporte)
             for estado, cantidad in conteo_estados.items():
                 print(f" - {estado}: {cantidad} alumnos")
                 
+
         elif opcion == "3":
             print("===> ESTUDIANTES APROBADOS:")
             aprobados = filtrar_por_estado(Reporte, "Aprobado")
@@ -153,12 +155,14 @@ if __name__ == "__main__":
                 for student in aprobados:
                     print(f" - {student['nombre']} (Promedio: {student['promedio']})")
                     
+
         elif opcion == "4":
             print("===> RANKING DE ESTUDIANTES (Del mejor a peor):")
             reporte_ordenado = ordenar_reporte(Reporte, clave='promedio', descendente=True)
             for i, r in enumerate(reporte_ordenado):
                 print(f" {i+1}. {r['nombre']} - Promedio: {r['promedio']}")
                 
+
         elif opcion == "5":
             nombre_buscado = input("Estimado, porfavor, ingrese el nombre del estudiante a buscar: ")
             encontrado = buscar_estudiante(Reporte, nombre_buscado)
@@ -169,6 +173,7 @@ if __name__ == "__main__":
             else:
                 print("\nEl estudiante no se encuentra en los registros.")
                 
+
         elif opcion == "6":
             print("===> ANÁLISIS DE CONSISTENCIA:")
             mas_consistente = Reporte[0]
@@ -189,5 +194,6 @@ if __name__ == "__main__":
             print("Nos vemos!! saludosss!!!")
             break 
             
+
         else:
             print("Opción no válida. Por favor, ingresa un número del 1 al 7.")
