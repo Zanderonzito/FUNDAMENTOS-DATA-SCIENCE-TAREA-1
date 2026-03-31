@@ -38,7 +38,7 @@ def aplanar_notas(estudiantes):
     for estudiante in estudiantes:
         for nota in estudiante["notas"]:
             todas.append(nota)
-            return todas
+    return todas
 
 def contar_frecuencias(datos):
     frecuencias={}
@@ -152,27 +152,43 @@ def calcular_bigramas(texto_limpio):
 
 #Menú prueba
 
-if __name__ == "__main__":
-
-    # 3a)
+def mostrar_menu():
+    """Muestra el menú principal de opciones."""
+    print("\n" + "=" * 50)
+    print("  EJERCICIO 3: Análisis de Frecuencias y Texto")
     print("=" * 50)
-    print("  EJERCICIO 3a")
+    print("  1. Frecuencias y moda de notas (3a)")
+    print("  2. Histograma de notas (3b)")
+    print("  3. Clasificación por tramos (3c)")
+    print("  4. Análisis de texto (3d)")
+    print("  5. Análisis de bigramas (3e)")
+    print("  6. Ejecutar todo")
+    print("  0. Salir")
+    print("=" * 50)
+    
+def ejecutar_ejercicio_3a():
+    """Ejecuta el ejercicio 3a: análisis de frecuencias y moda."""
+    print("\n" + "=" * 50)
+    print("  EJERCICIO 3a - Frecuencias y Moda")
     print("=" * 50)
     todas_las_notas = aplanar_notas(estudiantes)
     print(f"  Total de notas aplanadas : {len(todas_las_notas)}")
     frecuencias_notas = contar_frecuencias(todas_las_notas)
     moda, cantidad_moda = encontrar_moda(frecuencias_notas)
     print(f"  Moda                     : {moda} (aparece {cantidad_moda} veces)")
-
-    # 3b)
-    print("=" * 50)
-    print(" EJERCICIO 3b")
+    return todas_las_notas, frecuencias_notas
+    
+def ejecutar_ejercicio_3b(frecuencias_notas):
+    """Ejecuta el ejercicio 3b: generación de histograma."""
+    print("\n" + "=" * 50)
+    print("  EJERCICIO 3b - Histograma")
     print("=" * 50)
     generar_histograma(frecuencias_notas)
-
-    # 3c)
+    
+def ejecutar_ejercicio_3c(todas_las_notas):
+    """Ejecuta el ejercicio 3c: clasificación por tramos."""
     print("\n" + "=" * 50)
-    print("  EJERCICIO 3c")
+    print("  EJERCICIO 3c - Clasificación por Tramos")
     print("=" * 50)
     tramos = {
         "Reprobado  (1.0 – 3.9)": (1.0, 3.9),
@@ -183,30 +199,83 @@ if __name__ == "__main__":
     conteo_tramos = clasificar_en_tramos(todas_las_notas, tramos)
     for tramo, cantidad in conteo_tramos.items():
         print(f"  {tramo} : {cantidad} notas")
-
-    # 3d)
+        
+def ejecutar_ejercicio_3d():
+    """Ejecuta el ejercicio 3d: análisis de texto."""
     print("\n" + "=" * 50)
-    print("  EJERCICIO 3d — Análisis de texto")
+    print("  EJERCICIO 3d - Análisis de Texto")
     print("=" * 50)
     texto_limpio = limpiar_texto(texto)
     print(f"  Texto limpio (primeros 80 chars):")
     print(f"  {texto_limpio[:80]}")
-
+    
     freq_palabras = frecuencia_palabras(texto_limpio)
     diversidad = diversidad_lexica(texto_limpio)
     print(f"\n  Diversidad léxica : {diversidad:.2%}")
-
+    
     top10 = top_n_palabras(freq_palabras, n=10)
     print("\n  Top 10 palabras más frecuentes:")
     for palabra, freq in top10:
         print(f"  {palabra:<20} {freq}")
-
-    # 3e)
+    
+    return texto_limpio
+    
+def ejecutar_ejercicio_3e(texto_limpio):
+    """Ejecuta el ejercicio 3e: análisis de bigramas."""
     print("\n" + "=" * 50)
-    print("  EJERCICIO 3e — Bigramas")
+    print("  EJERCICIO 3e - Bigramas")
     print("=" * 50)
     bigramas = calcular_bigramas(texto_limpio)
     top_bigramas = top_n_palabras(bigramas, n=5)
     print("  Top 5 bigramas más frecuentes:")
     for bigrama, freq in top_bigramas:
         print(f"  {bigrama:<25} {freq}")
+        
+def ejecutar_todo():
+    """Ejecuta todos los ejercicios en secuencia."""
+    todas_las_notas, frecuencias_notas = ejecutar_ejercicio_3a()
+    ejecutar_ejercicio_3b(frecuencias_notas)
+    ejecutar_ejercicio_3c(todas_las_notas)
+    texto_limpio = ejecutar_ejercicio_3d()
+    ejecutar_ejercicio_3e(texto_limpio)
+if __name__ == "__main__":
+    print("***********Análisis de Frecuencias y Texto***********")
+    todas_las_notas = None
+    frecuencias_notas = None
+    texto_limpio = None
+    
+    while True:
+        mostrar_menu()
+        opcion = input("\n  Ingrese su opción: ")
+        
+        if opcion == "1":
+            todas_las_notas, frecuencias_notas = ejecutar_ejercicio_3a()
+        
+        elif opcion == "2":
+            if frecuencias_notas is None:
+                todas_las_notas, frecuencias_notas = ejecutar_ejercicio_3a()
+            ejecutar_ejercicio_3b(frecuencias_notas)
+        
+        elif opcion == "3":
+            if todas_las_notas is None:
+                todas_las_notas, frecuencias_notas = ejecutar_ejercicio_3a()
+            ejecutar_ejercicio_3c(todas_las_notas)
+        
+        elif opcion == "4":
+            texto_limpio = ejecutar_ejercicio_3d()
+        
+        elif opcion == "5":
+            if texto_limpio is None:
+                texto_limpio = limpiar_texto(texto)
+            ejecutar_ejercicio_3e(texto_limpio)
+        
+        elif opcion == "6":
+            ejecutar_todo()
+        
+        elif opcion == "0":
+            print("\n ¡Nos vemos!")
+            break
+        
+        else:
+            print("\nOpción inválida. Intente nuevamente.")
+
