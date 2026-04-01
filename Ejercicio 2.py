@@ -82,17 +82,28 @@ def filtrar_por_estado(reporte, estado):
 
 #|||||||||||||||||||||||EJERCICIO 2C|||||||||||||||||||||
 def ordenar_reporte(reporte, clave='promedio', descendente=True):
-    "Aquí ordenamos en si, cualquier clave numérica usando bubble sort."
     registro = list(reporte)
-    numero = len(registro)
-    for iteracion in range(numero):
-        for posicion in range(0, numero - iteracion - 1):
-            if descendente:
-                if registro[posicion][clave] < registro[posicion + 1][clave]:
-                    registro[posicion], registro[posicion + 1] = registro[posicion + 1], registro[posicion]
+    n = len(registro)
+
+    for iteracion in range(1, n):
+        actual = registro[iteracion]
+        valor = actual[clave]
+        posicion = iteracion - 1
+
+        while posicion >= 0:
+            if not descendente:
+                condicion = registro[posicion][clave] > valor
             else:
-                if registro[posicion][clave] > registro[posicion + 1][clave]:
-                    registro[posicion], registro[posicion + 1] = registro[posicion + 1], registro[posicion]
+                condicion = registro[posicion][clave] < valor
+
+            if condicion:
+                registro[posicion + 1] = registro[posicion]
+                posicion -= 1
+            else:
+                break
+
+        registro[posicion + 1] = actual
+
     return registro
 
 #||||||||||||||||||||||||Ejercicio 2D|||||||||||||||||||||
@@ -149,6 +160,7 @@ if __name__ == "__main__":
         elif opcion == "3":
             print("===> ESTUDIANTES APROBADOS:")
             aprobados = filtrar_por_estado(Reporte, "Aprobado")
+            aprobados = ordenar_reporte(aprobados, clave='promedio', descendente=True)
             if len(aprobados) == 0:
                 print("No hay estudiantes con estado Aprobado.")
             else:
