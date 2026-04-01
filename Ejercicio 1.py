@@ -3,6 +3,12 @@
 
 notas = [4.8, 6.2, 5.5, 3.9, 7.0, 4.1, 5.8, 6.0, 3.5, 5.2, 6.8, 2.9, 4.0, 5.0, 6.5, 4.3, 5.7, 3.2, 6.1, 4.6]
 grados_c = [0, 15, 25, 30, 100]
+ciudades = [
+{"ciudad": "Santiago", "temperaturas": [30.2, 28.5, 25.1, 18.3, 12.7, 9.5, 8.8, 10.1, 14.6, 19.3, 24.8, 28.9]},
+{"ciudad": "Valparaíso", "temperaturas": [22.1, 21.8, 20.5, 17.2, 14.3, 12.1, 11.5, 12.0, 13.8, 16.5, 19.2, 21.0]},
+{"ciudad": "Concepción", "temperaturas": [20.5, 19.8, 17.2, 13.5, 10.8, 8.5, 7.9, 9.2, 11.5, 14.8, 17.5, 19.8]},
+{"ciudad": "Temuco", "temperaturas": [22.3, 21.5, 18.0, 13.2, 9.5, 7.0, 6.5, 8.0, 10.5, 14.0, 17.8, 20.5]},
+{"ciudad": "Punta Arenas", "temperaturas": [14.2, 13.5, 11.0, 7.5, 4.2, 2.0, 1.5, 3.0, 6.5, 9.8, 12.0, 13.8]},]
 
 # 1a) Funciones básicas 
 def calcular_suma(datos): 
@@ -19,7 +25,9 @@ def calcular_largo(datos):
     return contador  
  
 def calcular_promedio(datos):
-   return calcular_suma(datos)/calcular_largo(datos)
+   promedio = calcular_suma(notas)/calcular_largo(notas)
+   return round(promedio, 2)
+
 
 def calcular_minimo(datos):
     minimo = 999
@@ -65,14 +73,14 @@ def calcular_mediana(datos):
         mediana = (lista_ordenada[int(largo_lista/2)])    
    return mediana
 
-def calcular_desviacion_estandar(notas):
-   promedio = calcular_promedio(notas)
+def calcular_desviacion_estandar(datos):
+   promedio = calcular_promedio(datos)
    suma = 0
-   for elemento in notas:
+   for elemento in datos:
       diferencia = elemento - promedio
-      suma = suma + diferencia * diferencia
-   varianza = suma / calcular_largo(notas)
-   return round(varianza ** 0.5)
+      suma = suma + diferencia ** 2
+   varianza = suma / calcular_largo(datos)
+   return round(varianza ** 0.5, 2)
 
 
 
